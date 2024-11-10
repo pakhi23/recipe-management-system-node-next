@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 import Header from '../../components/common/Header';
 import Footer from '../../components/common/Footer';
@@ -56,7 +57,6 @@ const MenuPage = () => {
     ];
 
     return (
-
         <div>
             <Header />
             <section className="relative text-black text-center py-20">
@@ -71,28 +71,30 @@ const MenuPage = () => {
                 ></div>
                 <div className="absolute inset-0 bg-black opacity-40"></div> {/* Overlay for contrast */}
                 <div className="relative z-10">
-                    <h1 className="text-5xl font-bold text-white mb-4">Our Menu</h1> {/* Text color set to white */}
-                    <p className="text-lg text-white mb-6">Discover our delicious offerings crafted with love!</p> {/* Text color set to white */}
+                    <h1 className="text-5xl font-bold text-white mb-4">Our Menu</h1>
+                    <p className="text-lg text-white mb-6">Discover our delicious offerings crafted with love!</p>
                 </div>
             </section>
             <section className="py-16 bg-gray-100">
                 <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     {menuItems.map((item, index) => (
+                        <Link href={`/menu/${index}`} key={index}>
                         <div key={index} className="bg-white p-6 rounded-lg shadow-md transition-transform transform hover:scale-105">
                             <img
                                 src={item.image}
                                 alt={item.name}
                                 className="rounded-lg mb-4 h-48 object-cover w-full"
                             />
-                            <h3 className="font-bold text-xl mb-2">{item.name}</h3>
+                            <h3 className="font-bold text-xl mb-2" style={{ color: 'rgb(239, 68, 68)' }}>{item.name}</h3>
                             <p className="text-gray-600 mb-2">{item.description}</p>
                             <p className="text-gray-700 font-semibold mt-2">{item.price}</p>
                             <button
-                                className="bg-[#7da640] text-white px-4 py-2 rounded-lg hover:bg-green-700 transition duration-300 mt-4"
+                                className="bg-[rgb(239,68,68)] text-white px-4 py-2 rounded-lg hover:bg-red-700 transition duration-300 mt-4"
                             >
                                 Add to Cart
                             </button>
                         </div>
+                        </Link>
                     ))}
                 </div>
             </section>
