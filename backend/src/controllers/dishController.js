@@ -38,8 +38,7 @@ exports.createDish = async (req, res) => {
     
     } catch (error) {
         // Agar koi error hota hai to catch block execute hoga
-        console.error(error);
-        console.error('my');
+        console.error(error);       
         return res.status(500).json({ error: 'Internal Server Error' });
     }
 }
