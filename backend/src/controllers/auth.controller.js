@@ -6,9 +6,18 @@ const register = async (req, res) => {
     const { name, email, password } = req.body;
     try {
         const { user, token } = await registerUser(name, email, password);
-        res.status(201).json({ success: true, user, token });
+        res.status(201).json({
+            success: true,
+            message: "Registration successful",
+            data: { user, token },
+        });
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        const statusCode = error.message === "User already exists" ? 409 : 400;
+        res.status(statusCode).json({
+            success: false,
+            message: error.message,
+            errors: null, // Optional for validation errors
+        });
     }
 };
 
@@ -18,9 +27,17 @@ const login = async (req,res)=>{
     const {email,password} = req.body;
     try{
        const {user,token} = await loginUser(email,password);
-       res.status(200).json({success:true,message:"login successfully",token});
+       res.status(200).json({
+        success: true,
+        message: "Login successful",
+        data: { user, token },
+    });
     }catch(error){
-        res.status(400).json({message:error.message});
+        res.status(400).json({
+            success: false,
+            message: error.message,
+            errors: null,
+        });
     }
 };
 
